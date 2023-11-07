@@ -1,4 +1,5 @@
-var apiUrl='http://localhost:4001'
+// var apiUrl='http://assortedgummies.uk.to:4001'
+var apiUrl='http://spore.us.to:4001'
 
 const socket = io.connect(apiUrl,{jsonp:false,transports:['websocket', 'xhr-polling', 'polling', 'htmlfile', 'flashsocket']})
 
