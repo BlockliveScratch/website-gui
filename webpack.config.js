@@ -211,6 +211,14 @@ module.exports = [
                         noErrorOnMissing: true
                     }
                 ]
+            }),
+            new CopyWebpackPlugin({
+                patterns: [
+                    {
+                        from: 'blocklive',
+                        to: 'blocklive',
+                    }
+                ]
             })
         ])
     })
