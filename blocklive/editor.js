@@ -2696,7 +2696,8 @@ listenForObj('#app > div > div.gui_menu-bar-position_3U1T0.menu-bar_menu-bar_Jcu
 )
 
 //// Inject active users display
-listenForObj("#app > div > div.gui_menu-bar-position_3U1T0.menu-bar_menu-bar_JcuHF.box_box_2jjDp > div.menu-bar_account-info-group_MeJZP",(accountInfo)=>{
+listenForObj("div > div.gui_menu-bar-position_3U1T0.menu-bar_menu-bar_JcuHF.box_box_2jjDp > div.menu-bar_account-info-group_MeJZP",(accountInfo)=>{
+// listenForObj("#app > div > div.gui_menu-bar-position_3U1T0.menu-bar_menu-bar_JcuHF.box_box_2jjDp > div.menu-bar_account-info-group_MeJZP",(accountInfo)=>{
    
     let topBar = accountInfo.parentElement;
 
@@ -3178,6 +3179,8 @@ try{
     let blChat = document.createElement('bl-chat')
     blChat.id = 'bl-chat'
     blChat.innerHTML = blChatHTML
+    blChat.style.top='200px'
+    blChat.style.left='200px'
     // blChat.style.visibility = 'hidden'
     document.body.appendChild(blChat)
 
