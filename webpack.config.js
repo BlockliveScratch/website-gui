@@ -19,7 +19,7 @@ const base = {
     devtool: 'cheap-module-source-map',
     devServer: {
         contentBase: path.resolve(__dirname, 'build'),
-        allowedHosts: "all"
+        disableHostCheck: true,
     },
     output: {
         library: 'GUI',
