@@ -1624,6 +1624,7 @@ vm.addCostume = asyncAnyproxy(vm,vm.addCostume,"addcostume",
     async (data)=>{
         let ret = [data.args[0],data.args[1],nameToTarget(data.extrargs.target)?.id,data.args[3]]
         if(ret[1]?.asset?.data) {
+            let asset = ret[1].asset
             // adapted from scratch source 'file-uploader'
             // let asset = vm.runtime.storage.createAsset(
             //     ret[1].asset.assetType, 
