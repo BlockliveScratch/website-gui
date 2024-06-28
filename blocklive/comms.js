@@ -145,7 +145,7 @@ if(msg.meta=="blockly.event" || msg.meta=="sprite.proxy"||msg.meta=="vm.blockLis
 //   // if(getCurrentTab()?.id!=tab?.id) {
 //   // }
   
-} {
+} else {
   msg.blId = blId ?? msg.blId
   socket.send(msg)
 }
