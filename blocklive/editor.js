@@ -1613,7 +1613,7 @@ vm.reorderCostume = proxy(vm.reorderCostume,"reordercostume",
 vm.shareCostumeToTarget = editingProxy(vm.shareCostumeToTarget,'sharecostume',null,null,(args)=>({
     targettarget:BL_UTILS.targetToName(vm.runtime.getTargetById(args[1]))
 }),(data)=>([data.args[0],BL_UTILS.nameToTarget(data.extrargs.targettarget)?.id]))
-vm.addCostume = asyncEditingProxy(vm.addCostume,"addcostume",
+vm.addCostume = asyncAnyproxy(vm,vm.addCostume,"addcostume",
     async (args)=>{
         let targetName;
         let asset = args[1].asset;
