@@ -1626,19 +1626,19 @@ vm.addCostume = asyncAnyproxy(vm,vm.addCostume,"addcostume",
     async (data)=>{
         let ret = [data.args[0],data.args[1],nameToTarget(data.extrargs.target)?.id,data.args[3]]
 
-        let assetObj = args[1].asset
+        let assetObj = data.args[1].asset
 
               //assetType, assetId, dataFormat
         let asset = await vm.runtime.storage.load(assetObj.assetType,assetObj.assetId,assetObj.dataFormat);
         
         ret[1].asset = asset;
         return ret
-    },null,null,null,null,null,(args=>{
+    },null,null,null,null,null,args=>{
         args[1] = {...args[1]}
         args[1].asset = {...args[1].asset}
         delete args[1].asset.data
         return args;
-    })
+    }
 )
 
 vm.addBackdrop = proxy(vm.addBackdrop,"addbackdrop",
