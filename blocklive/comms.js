@@ -1,6 +1,9 @@
 var apiUrl=`${location.origin}/websiteapi`
 
-const socket = io.connect(apiUrl,{jsonp:false,transports:['websocket', 'xhr-polling', 'polling', 'htmlfile', 'flashsocket']})
+const URLApiUrl = new URL(apiUrl);
+const URLApiDomain = URLApiUrl.origin
+const URLApiPath = [''].concat(URLApiUrl.pathname.split('/').filter(Boolean)).join('/')
+const socket = io.connect(URLApiDomain,{path: `${URLApiPath}/socket.io/`,jsonp:false,transports:['websocket', 'xhr-polling', 'polling', 'htmlfile', 'flashsocket']})
 
 /////// RECIEVING
 // REPLACE PORT.POSTMESSAGE WITH blockliveListener(message)
