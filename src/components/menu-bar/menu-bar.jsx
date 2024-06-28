@@ -688,7 +688,7 @@ class MenuBar extends React.Component {
                     </div>
                     <Divider className={classNames(styles.divider)} />
                     <div className={styles.fileGroup}>
-                        <div
+                        {/* <div
                             aria-label={this.props.intl.formatMessage(ariaMessages.tutorials)}
                             className={classNames(styles.menuBarItem, styles.hoverable)}
                             onClick={this.props.onOpenTipLibrary}
@@ -700,7 +700,7 @@ class MenuBar extends React.Component {
                             <span className={styles.tutorialsLabel}>
                                 <FormattedMessage {...ariaMessages.tutorials} />
                             </span>
-                        </div>
+                        </div> blocklive edit */}
                     </div>
                 </div>
 
@@ -788,9 +788,9 @@ class MenuBar extends React.Component {
                     ) : (
                         // ******** no login session is available, so don't show login stuff
                         <React.Fragment>
-                            {this.props.showComingSoon ? (
+                            {this.props.showComingSoon || true ? ( // blocklive edit
                                 <React.Fragment>
-                                    <MenuBarItemTooltip id="mystuff">
+                                    {/* <MenuBarItemTooltip id="mystuff">
                                         <div
                                             className={classNames(
                                                 styles.menuBarItem,
@@ -803,16 +803,19 @@ class MenuBar extends React.Component {
                                                 src={mystuffIcon}
                                             />
                                         </div>
-                                    </MenuBarItemTooltip>
-                                    <MenuBarItemTooltip
+                                    </MenuBarItemTooltip> */}
+                                  
+                                  
+                                    {/* <MenuBarItemTooltip
                                         id="account-nav"
                                         place={this.props.isRtl ? 'right' : 'left'}
-                                    >
+                                    > */}
                                         <div
                                             className={classNames(
                                                 styles.menuBarItem,
                                                 styles.hoverable,
-                                                styles.accountNavMenu
+                                                // styles.accountNavMenu,
+                                                {[styles.active]: this.props.accountMenuOpen}
                                             )}
                                         >
                                             <img
@@ -820,14 +823,14 @@ class MenuBar extends React.Component {
                                                 src={profileIcon}
                                             />
                                             <span>
-                                                {'scratch-cat'}
+                                                {localStorage.getItem('username') || 'monke2314'}
                                             </span>
-                                            <img
+                                            {/* <img
                                                 className={styles.dropdownCaretIcon}
                                                 src={dropdownCaret}
-                                            />
+                                            /> */}
                                         </div>
-                                    </MenuBarItemTooltip>
+                                    {/* </MenuBarItemTooltip> */}
                                 </React.Fragment>
                             ) : []}
                         </React.Fragment>

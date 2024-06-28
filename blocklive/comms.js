@@ -142,7 +142,7 @@ if(msg.meta=="blockly.event" || msg.meta=="sprite.proxy"||msg.meta=="vm.blockLis
 //   // if(getCurrentTab()?.id!=tab?.id) {
 //   // }
   
-} else {
+} {
   msg.blId = blId ?? msg.blId
   socket.send(msg)
 }
@@ -175,7 +175,7 @@ async function onExternalMessage (exId, request, sendResponse) {
       fetch(`${apiUrl}/projectSaved/${request.scratchId}/${request.version}`,{method:'POST'})
     } else if(request.meta == 'projectSavedJSON') {
       // {meta:'projectSaved',blId,scratchId,version:blVersion}
-      fetch(`${apiUrl}/projectSavedJSON/${request.blId}/${request.version}`,{method:'POST',body:request.json,headers:{'Content-Type': 'application/json'}})
+      fetch(`${apiUrl}/projectSavedJSON/${request.blId}/${request.version}?force=${request.force}`,{method:'POST',body:request.json,headers:{'Content-Type': 'application/json'}})
     } else if(request.meta == 'myStuff') {
       sendResponse(await(await fetch(`${apiUrl}/userProjectsScratch/${await refreshUsername()}`)).json())
     } else if(request.meta == 'create') {

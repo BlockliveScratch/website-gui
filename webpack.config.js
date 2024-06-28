@@ -20,7 +20,8 @@ const base = {
     devServer: {
         contentBase: path.resolve(__dirname, 'build'),
         // host: 'website-gui-production.up.railway.app',
-        allowedHosts: "all",
+        host: '0.0.0.0',
+        port: process.env.PORT || 8601
     },
     output: {
         library: 'GUI',
@@ -128,13 +129,15 @@ module.exports = [
         entry: {
             'lib.min': ['react', 'react-dom'],
             'gui': './src/playground/index.jsx',
+            // 'gui': './src/index.js',
             'blocksonly': './src/playground/blocks-only.jsx',
             'compatibilitytesting': './src/playground/compatibility-testing.jsx',
             'player': './src/playground/player.jsx'
         },
         output: {
             path: path.resolve(__dirname, 'build'),
-            filename: '[name].js'
+            filename: '[name].js',
+
         },
         module: {
             rules: base.module.rules.concat([
@@ -166,7 +169,7 @@ module.exports = [
             new HtmlWebpackPlugin({
                 chunks: ['lib.min', 'gui'],
                 template: 'src/playground/index.ejs',
-                title: 'Scratch 3.0 GUI'
+                title: 'Blocklive Playground',
             }),
             new HtmlWebpackPlugin({
                 chunks: ['lib.min', 'blocksonly'],
@@ -219,7 +222,7 @@ module.exports = [
                         to: 'blocklive',
                     }
                 ]
-            })
+            }),
         ])
     })
 ].concat(

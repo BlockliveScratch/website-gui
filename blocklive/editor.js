@@ -120,6 +120,7 @@ let vm
 let readyToRecieveChanges = false
 
 async function startBlocklive(creatingNew) {
+
     pauseEventHandling = true
     liveMessage({meta:"myId",id:blId})
     injectLoadingOverlay()
@@ -170,8 +171,10 @@ async function onTabLoad() {
     } else {
     }
 
+    if(typeof addStoreListen!='undefined') {addStoreListen(store)}
+
 }
-onTabLoad()
+onTabLoad() //? !
 
 async function joinExistingBlocklive(id) {
     projectReplaceInitiated = true
@@ -262,6 +265,7 @@ async function activateBlocklive() {
 
         // sync all other project changes
         changes = await getChanges(blId,blVersion)
+        if(changes.forceReload) {window.location.reload();}
         if(typeof BL_UTILS != 'undefined' && BL_UTILS.isDragging()) {
             console.log('queing it for later')
             playAfterDragStop.push({meta:'resyncCached',changes})
@@ -338,6 +342,8 @@ setInterval(reconnectIfNeeded,1000)
             blVersion++;
         } else if(msg.meta == 'chat') {
             addMessage(msg.msg,true)
+        } else if(msg.meta == 'forceReload') {
+            window.location.reload()
         }
         } catch (e) {console.error(e)}
     }
@@ -1713,6 +1719,7 @@ vm.updateBitmap = (...args)=>{
 
         // send costume to scratch servers
         let stored = await vm.runtime.storage.store(asset.assetType,asset.dataFormat,asset.data,asset.assetId);
+        asset.uploaded=true
         if(!hasCostumeMd5(oldAssetMd5)) {vm.runtime.storage.delete(oldAssetMd5)}
         // get costume info to send
 
@@ -1799,7 +1806,6 @@ vm.updateSvg = (...args)=>{
     let target = BL_UTILS.targetToName(vm.editingTarget);
 
     let costume = vm.editingTarget.getCostumes()[costumeIndex];
-   
 
     // const storage = vm.runtime.storage;
     // costume.asset = storage.createAsset(
@@ -1822,6 +1828,7 @@ vm.updateSvg = (...args)=>{
     console.log(args)
     // send costume to scratch servers
     let stored = await vm.runtime.storage.store(asset.assetType,asset.dataFormat,asset.data,asset.assetId);
+    asset.uploaded = true
     if(!hasCostumeMd5(oldAssetMd5)) {vm.runtime.storage.delete(oldAssetMd5)}
     // get costume info to send
 
@@ -1841,6 +1848,7 @@ async function updateSvg(msg) {
     asset = await vm.runtime.storage.load(msg.assetType,msg.costume.assetId,msg.costume.dataFormat)
 
     costume.asset = asset
+    delete costume.broken
     Object.entries(msg.costume).forEach(entry=>{
         if(entry[0]=='skinId'){return}
         costume[entry[0]] = entry[1]
@@ -2474,6 +2482,8 @@ justify-items:center;
 
 usersCache = {}
 
+//? {
+
 async function getUserInfo(username) {
     if(!username) {return}
     if(username?.toLowerCase() in usersCache && usersCache[username?.toLowerCase()]?.pk) {return usersCache[username?.toLowerCase()]}
@@ -2498,6 +2508,7 @@ function getWithPic(user) {
     return user
 }
 
+//? }
 
 async function addCollaboratorGUI (user,omitX){
     if(user.username.toLowerCase() in shareDivs) {return}
@@ -2856,7 +2867,7 @@ async function displayActive(users) {
 }
 
 blCursors=null;
-//? {
+
 function reloadOnlineUsers() {
     chrome.runtime.sendMessage(exId,{meta:'getActive',id:blId},(res)=>{
         if(JSON.stringify(blCursors)==JSON.stringify(res)) {return}
@@ -2866,7 +2877,6 @@ function reloadOnlineUsers() {
         // moveMyBubble()
     })
 }
-//? }
 function showCachedOnlineUsers() {
     clearActive()
     try{displayActive(blCursors)}catch(e){console.error(e)}
@@ -3432,7 +3442,7 @@ let spriteDisplayCSS = `
     height:20px;
     border-radius:100%;
     outline: solid 2px #ff24e2;
-    background-size:cover;
+    background-size:100%;
 }
 `
 

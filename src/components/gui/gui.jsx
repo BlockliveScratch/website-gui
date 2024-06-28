@@ -9,6 +9,7 @@ import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import tabStyles from 'react-tabs/style/react-tabs.css';
 import VM from 'scratch-vm';
 import Renderer from 'scratch-render';
+import newlogo from '../../../blocklive/img/logo.svg'
 
 import Blocks from '../../containers/blocks.jsx';
 import CostumeTab from '../../containers/costume-tab.jsx';
@@ -93,7 +94,7 @@ const GUIComponent = props => {
         isTelemetryEnabled,
         isTotallyNormal,
         loading,
-        logo,
+        logo=newlogo,
         renderLogin,
         onClickAbout,
         onClickAccountNav,
@@ -447,7 +448,7 @@ GUIComponent.defaultProps = {
     canChangeLanguage: true,
     canChangeTheme: true,
     canCreateNew: false,
-    canEditTitle: false,
+    canEditTitle: true,
     canManageFiles: true,
     canRemix: false,
     canSave: false,
@@ -456,8 +457,10 @@ GUIComponent.defaultProps = {
     canUseCloud: false,
     enableCommunity: false,
     isCreating: false,
-    isShared: false,
-    isTotallyNormal: false,
+    isShared: true,
+    isTotallyNormal: true,
+    // isShared: false,
+    // isTotallyNormal: false,
     loading: false,
     showComingSoon: false,
     stageSizeMode: STAGE_SIZE_MODES.large
@@ -467,7 +470,9 @@ const mapStateToProps = state => ({
     // This is the button's mode, as opposed to the actual current state
     blocksId: state.scratchGui.timeTravel.year.toString(),
     stageSizeMode: state.scratchGui.stageSize.stageSize,
-    theme: state.scratchGui.theme.theme
+    theme: state.scratchGui.theme.theme,
+    showComingSoon:false, // blocklive
+    backpackVisible: false,
 });
 
 export default injectIntl(connect(
