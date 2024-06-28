@@ -1629,7 +1629,7 @@ vm.addCostume = asyncAnyproxy(vm,vm.addCostume,"addcostume",
     async (data)=>{
         let ret = [data.args[0],data.args[1],nameToTarget(data.extrargs.target)?.id,data.args[3]]
 
-        let assetObj = args[1]
+        let assetObj = args[1].asset
 
               //assetType, assetId, dataFormat
         let asset = await vm.runtime.storage.load(assetObj.assetType,assetObj.assetId,assetObj.dataFormat);
