@@ -1,4 +1,5 @@
-export const assetsUrl = 'http://localhost:4103';
+// export const assetsUrl = 'http://localhost:4103';
+export const assetsUrl=`${location.origin}/assets`
 export const projectsUrl = 'http://localhost:3001';
 // export const assetsUrl = '';
 
