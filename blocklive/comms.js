@@ -42,7 +42,7 @@ socket.on('message',(data)=>{
     data.msg.version = data.version
     playChange(data.msg)
  } else if(data.type=='yourVersion') {
-    console.log('WHAT DO I DO?????')
+    
  }
 })
 

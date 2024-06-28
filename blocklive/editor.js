@@ -1611,26 +1611,32 @@ vm.reorderCostume = proxy(vm.reorderCostume,"reordercostume",
 vm.shareCostumeToTarget = editingProxy(vm.shareCostumeToTarget,'sharecostume',null,null,(args)=>({
     targettarget:BL_UTILS.targetToName(vm.runtime.getTargetById(args[1]))
 }),(data)=>([data.args[0],BL_UTILS.nameToTarget(data.extrargs.targettarget)?.id]))
-vm.addCostume = proxy(vm.addCostume,"addcostume",
-    (args)=>{
-        let targetName
+vm.addCostume = asyncAnyproxy(vm,vm.addCostume,"addcostume",
+    async (args)=>{
+        let targetName;
+        let assetObj = args[1]
+        //assetType, assetId, dataFormat
+        let asset = await vm.runtime.storage.load(assetObj.assetType,assetObj.assetId,assetObj.dataFormat);
+        args[1].asset = asset;
         if(!!args[2]){targetName = targetToName(vm.runtime.getTargetById(args[2]))} else {targetName = targetToName(vm.editingTarget)}
         return {target:targetName}
     },
-    (data)=>{
+    async (data)=>{
         let ret = [data.args[0],data.args[1],nameToTarget(data.extrargs.target)?.id,data.args[3]]
         if(ret[1]?.asset?.data) {
             // adapted from scratch source 'file-uploader'
-            ret[1].asset = vm.runtime.storage.createAsset(
+            let asset = vm.runtime.storage.createAsset(
                 ret[1].asset.assetType, 
                 ret[1].asset.dataFormat,
                 Uint8Array.from(Object.values(ret[1].asset.data)),null,true);
+            let stored = await vm.runtime.storage.store(asset.assetType,asset.dataFormat,asset.data,asset.assetId);
             ret[1] = {
                 name: null,
                 dataFormat: ret[1].asset.dataFormat,
-                asset: ret[1].asset,
-                md5: `${ret[1].asset.assetId}.${ret[1].asset.dataFormat}`,
-                assetId: ret[1].asset.assetId
+                // asset: ret[1].asset,
+                md5: `${asset.assetId}.${asset.dataFormat}`,
+                assetId: asset.assetId,
+                assetType:asset.assetType
             };
         }
         return ret
