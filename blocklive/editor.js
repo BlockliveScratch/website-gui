@@ -3147,7 +3147,7 @@ bl-chat-head-x{
     height:30px;
     line-height: 16px;
     text-align: center;
-    background-color: rgb(200, 1, 104);
+    background-color: rgb(255, 54, 171);
     margin-right:6px;
     color:white;
     transition: 0.2s scale;
