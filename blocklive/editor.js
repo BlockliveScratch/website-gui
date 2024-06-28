@@ -1619,12 +1619,13 @@ vm.addCostume = asyncAnyproxy(vm,vm.addCostume,"addcostume",
         let targetName;
         let asset = args[1].asset;
 
-        if(asset.data) {
+        let hasData = asset?.data;
+        if(hasData) {
             let stored = await vm.runtime.storage.store(asset.assetType,asset.dataFormat,asset.data,asset.assetId);
         }
   
         if(!!args[2]){targetName = targetToName(vm.runtime.getTargetById(args[2]))} else {targetName = targetToName(vm.editingTarget)}
-        return {target:targetName,load:!!asset.data}
+        return {target:targetName,hasData}
     },
     async (data)=>{
         let ret = [data.args[0],data.args[1],nameToTarget(data.extrargs.target)?.id,data.args[3]]
@@ -1632,7 +1633,7 @@ vm.addCostume = asyncAnyproxy(vm,vm.addCostume,"addcostume",
         let assetObj = data.args[1].asset
 
         //assetType, assetId, dataFormat
-        if(data.extrargs.load){
+        if(data.extrargs.hasData){
             let asset = await vm.runtime.storage.load(assetObj.assetType,assetObj.assetId,assetObj.dataFormat);
             ret[1].asset = asset;
 
