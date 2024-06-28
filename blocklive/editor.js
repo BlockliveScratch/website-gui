@@ -1614,32 +1614,27 @@ vm.shareCostumeToTarget = editingProxy(vm.shareCostumeToTarget,'sharecostume',nu
 vm.addCostume = asyncAnyproxy(vm,vm.addCostume,"addcostume",
     async (args)=>{
         let targetName;
-        let assetObj = args[1]
-        //assetType, assetId, dataFormat
-        let asset = await vm.runtime.storage.load(assetObj.assetType,assetObj.assetId,assetObj.dataFormat);
-        args[1].asset = asset;
+        let asset = args[1].asset;
+
+        args[1]={...args[1]}
+        args[1].asset={...args[1].asset}
+        delete args[1].asset.data
+
+
+        let stored = await vm.runtime.storage.store(asset.assetType,asset.dataFormat,asset.data,asset.assetId);
+
         if(!!args[2]){targetName = targetToName(vm.runtime.getTargetById(args[2]))} else {targetName = targetToName(vm.editingTarget)}
         return {target:targetName}
     },
     async (data)=>{
         let ret = [data.args[0],data.args[1],nameToTarget(data.extrargs.target)?.id,data.args[3]]
-        if(ret[1]?.asset?.data) {
-            let asset = ret[1].asset
-            // adapted from scratch source 'file-uploader'
-            // let asset = vm.runtime.storage.createAsset(
-            //     ret[1].asset.assetType, 
-            //     ret[1].asset.dataFormat,
-            //     Uint8Array.from(Object.values(ret[1].asset.data)),null,true);
-            let stored = await vm.runtime.storage.store(asset.assetType,asset.dataFormat,asset.data,asset.assetId);
-            ret[1] = {
-                name: null,
-                dataFormat: ret[1].asset.dataFormat,
-                // asset: ret[1].asset,
-                md5: `${asset.assetId}.${asset.dataFormat}`,
-                assetId: asset.assetId,
-                assetType:asset.assetType
-            };
-        }
+
+        let assetObj = args[1]
+
+              //assetType, assetId, dataFormat
+        let asset = await vm.runtime.storage.load(assetObj.assetType,assetObj.assetId,assetObj.dataFormat);
+        
+        ret[1].asset = asset;
         return ret
     }
 )
