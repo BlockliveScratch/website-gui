@@ -1650,27 +1650,63 @@ vm.addCostume = asyncAnyproxy(vm,vm.addCostume,"addcostume",
     }
 )
 
-vm.addBackdrop = proxy(vm.addBackdrop,"addbackdrop",
-    null,
-    (data)=>{
-        let ret = [data.args[0],data.args[1]]
-        if(ret[1]?.asset?.data) {
-            // adapted from scratch source 'file-uploader'
-            ret[1].asset = vm.runtime.storage.createAsset(
-                ret[1].asset.assetType, 
-                ret[1].asset.dataFormat,
-                Uint8Array.from(Object.values(ret[1].asset.data)),null,true);
-            ret[1] = {
-                name: null,
-                dataFormat: ret[1].asset.dataFormat,
-                asset: ret[1].asset,
-                md5: `${ret[1].asset.assetId}.${ret[1].asset.dataFormat}`,
-                assetId: ret[1].asset.assetId
-            };
+vm.addCostume = asyncAnyproxy(vm,vm.addCostume,"addbackdrop",
+    async (args)=>{
+        console.log('addbackdrop',args)
+        let asset = args[1].asset;
+
+        let hasData = asset?.data;
+        if(hasData) {
+            let stored = await vm.runtime.storage.store(asset.assetType,asset.dataFormat,asset.data,asset.assetId);
         }
+        return {hasData}
+    },
+    async (data)=>{
+        let ret = [data.args[0],data.args[1]]
+
+        let assetObj = data.args[1].asset
+
+        //assetType, assetId, dataFormat
+        if(data.extrargs.hasData){
+            let asset = await vm.runtime.storage.load(assetObj.assetType,assetObj.assetId,assetObj.dataFormat);
+            ret[1].asset = asset;
+        }
+        
         return ret
+    },null,null,null,null,null,args=>{
+        if(args[1]?.asset?.data) {
+            args[1] = {...args[1]}
+            args[1].asset = {...args[1].asset}
+            delete args[1].asset.data
+        }
+        return args;
     }
 )
+
+
+
+
+// vm.addBackdrop = proxy(vm.addBackdrop,"addbackdrop",
+//     null,
+//     (data)=>{
+//         let ret = [data.args[0],data.args[1]]
+//         if(ret[1]?.asset?.data) {
+//             // adapted from scratch source 'file-uploader'
+//             ret[1].asset = vm.runtime.storage.createAsset(
+//                 ret[1].asset.assetType, 
+//                 ret[1].asset.dataFormat,
+//                 Uint8Array.from(Object.values(ret[1].asset.data)),null,true);
+//             ret[1] = {
+//                 name: null,
+//                 dataFormat: ret[1].asset.dataFormat,
+//                 asset: ret[1].asset,
+//                 md5: `${ret[1].asset.assetId}.${ret[1].asset.dataFormat}`,
+//                 assetId: ret[1].asset.assetId
+//             };
+//         }
+//         return ret
+//     }
+// )
 // vm.updateBitmap = editingProxy(vm.updateBitmap,"updatebitmap",null,(_a,_b,data)=>{
 //     let costumeIndex = getSelectedCostumeIndex()
 //     // console.log(data)
