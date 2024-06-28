@@ -665,7 +665,7 @@ class MenuBar extends React.Component {
                         {this.props.canRemix ? remixButton : []}
                     </div>
                     <div className={classNames(styles.menuBarItem)}>
-                        Join Link: <input readOnly={'readonly'} id="joinLink" value={'wait...'} className={classNames(styles.joinLink,inputStyles.titleField)}></input>
+                        Join Link: <input readOnly={'readonly'} id="joinLink" defaultValue={'wait...'} className={classNames(styles.joinLink,inputStyles.titleField)}></input>
                     </div>
                     <div id='changeRoom' className={classNames(styles.menuBarItem)}>
                         <Button>Change Room</Button>
