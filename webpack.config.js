@@ -19,7 +19,8 @@ const base = {
     devtool: 'cheap-module-source-map',
     devServer: {
         contentBase: path.resolve(__dirname, 'build'),
-        host: 'website-gui-production.up.railway.app',
+        // host: 'website-gui-production.up.railway.app',
+        allowedHosts: "all",
     },
     output: {
         library: 'GUI',
