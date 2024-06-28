@@ -1,8 +1,4 @@
 
-if(location.search == '') {
-    location.href='/?id=1'
-}
-
 
 
 function reloadOnlineUsers() {

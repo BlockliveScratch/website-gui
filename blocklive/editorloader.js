@@ -1,6 +1,11 @@
 // import './editor.js'
 
 // process editor.js
+
+if(location.search == '') {
+    location.href='/?id=1'
+}
+
 async function getProcessed() {
     let editorScript = await (await fetch('./blocklive/editor.js')).text()
     let topAppend = await (await fetch('./blocklive/top.js')).text()
