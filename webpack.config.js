@@ -227,7 +227,8 @@ module.exports = [
         defaultsDeep({}, base, {
             target: 'web',
             entry: {
-                'scratch-gui': './src/index.js'
+                'scratch-gui': './src/index.js',
+                'site': './blocklive/src/App.js'
             },
             output: {
                 libraryTarget: 'umd',

@@ -1,0 +1,17 @@
+filters{
+    display: flex;
+    flex-flow: column;
+    gap:4px
+}
+
+postBoard{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    background-color: aliceblue;
+    padding:30px;
+    border-radius:50px;
+    width:max-content;
+    width:70vw;
+}

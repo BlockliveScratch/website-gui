@@ -1,0 +1,14 @@
+.types{
+    display: flex;
+    flex-flow: row;
+    gap:10px;
+    align-self: center;
+}
+.type{
+    padding:10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;;
+}
+.selectedType{
+    background-color: rgb(86, 114, 255);
+}

@@ -23,6 +23,7 @@ async function getProcessed() {
     const marker = '//?'
 
     editorScript=editorScript.replace(/chrome\.runtime\.sendMessage/g,'onExternalMessage')
+    bottomAppend=bottomAppend.replace(/chrome\.runtime\.sendMessage/g,'onExternalMessage')
     for (line of editorScript.split('\n')) {
         let args = line.split(marker)
         let operation = args[1]

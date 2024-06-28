@@ -1,0 +1,59 @@
+.posting {
+    display:flex;
+    flex-flow:column;
+    background-color: aliceblue;
+    border-radius: 20px;
+    padding:10px;
+    color:black;
+    align-items: start;
+}
+
+titleInfo{
+    display: flex;
+    flex-flow: row;
+    font-size: 40px;
+    align-items: end;
+    gap: 10px;
+}
+
+by{
+    font-size: 25px;
+}
+
+needs{
+    font-size: 25px;
+
+    display:flex;
+    flex-flow:row;
+    gap:10px;
+}
+
+needsText {
+    font-size: 25px;
+}
+
+projectType{
+    font-size: 25px;
+    padding:4px;
+    background-color: pink;
+    border-radius: 25px;
+    height:min-content;
+}
+
+.titleandby{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: end;
+    gap:10px;
+}
+
+pictures{
+    display: flex;
+    flex-flow: row wrap;
+
+}
+
+
+picture{
+    
+}

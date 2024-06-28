@@ -1,0 +1,24 @@
+tag {
+    /* padding:7px; */
+    --lrpadding:10px;
+    padding-left: var(--lrpadding);
+    padding-right: var(--lrpadding);
+    min-height:30px;
+    display: flex;
+    flex-flow: row;
+    border-radius: 15px;
+    gap:1px;
+    align-items: center;
+
+    background-color: rgb(194, 194, 194);
+    border:2px solid rgba(0, 0, 0, 0.379);
+
+    text-wrap: nowrap;
+    transition: 0.5s filter;
+
+}
+
+.unselected:hover{
+    filter:saturate(50);
+    /* display: none; */
+}

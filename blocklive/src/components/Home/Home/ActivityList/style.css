@@ -1,0 +1,29 @@
+.activitiesList {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    /* border:2px solid rgba(0, 0, 0, 0.111); */
+    overflow: hidden;
+    border-radius:40px;
+
+    flex-grow:1;
+}
+.activitiesList > * {
+    padding:10px;
+}
+
+.activitiesTitle{
+    font-weight: bold;
+    /* background: rgb(221, 221, 221); */
+}
+
+.activitiesItem{
+    display: flex;
+    flex-direction: row;
+}
+.activitiesItems {
+    display: flex;
+    flex-direction: column;
+    /* background-color: white; */
+}

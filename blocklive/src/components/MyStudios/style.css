@@ -1,0 +1,116 @@
+.myStudios{
+    display: flex;
+    flex-direction: column;
+
+    gap:15px;
+    /* gap:10px; */
+    align-items: center;
+}
+
+.createNewButton {
+    background-color: rgb(72, 214, 126);
+    color:white;
+    border: solid rgb(62, 186, 109) 2px;
+    padding:3px;
+    border-radius: 10px;
+    font-size: 25px;
+}
+
+.title{
+    font-size: 40px;
+    margin:10px;
+}
+
+
+
+.visualContainer{
+    background-color: white;
+    padding:20px;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--containerBorderRadius);
+    /* transition: 0.2s; */
+
+    width:650px;
+
+
+}
+.visualContainer:has(.crewContainer:hover){
+    /* padding:30px; */
+}
+
+
+
+
+
+
+.crewButton{
+    border-radius: 30px;
+    display: flex;
+    flex-flow:row;
+    overflow: hidden;
+
+    color:black;
+
+    width:600px;
+    /* height:200px; */
+
+    background-size: cover;
+    background-position: center;
+
+    transition: 0.2s;
+    
+
+}
+.crewButton:has(.crewContainer:hover){
+    padding:10px;
+}
+.crewContainer{
+    border-radius: inherit;
+    backdrop-filter: blur(5px) brightness(130%);
+    background-color: rgba(255, 255, 255, 0.444);
+    width:100%;
+    height:95%;
+    border: solid rgba(0, 0, 0, 0.271) 5px;
+
+
+    align-items: center;
+    justify-items: center;
+}
+
+.containerCrew1{
+    padding:20px;
+    display: flex;
+    flex-flow:row;
+    gap:10px;
+}
+
+.crewIcon {
+    height:120px;
+    width:120px;
+    border-radius: 50%;
+}
+
+.containerCrew2{
+    display: flex;
+    flex-flow:column;
+    align-items: start;
+}
+
+.crewName {
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: underline solid;
+
+}
+.crewInfo{
+    display: flex;
+    flex-flow:column;
+    align-items: start;
+}
+.crewName:hover {
+}
+
+.crewButton a{
+    color:#a3009e;
+}

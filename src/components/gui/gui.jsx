@@ -40,6 +40,7 @@ import addExtensionIcon from './icon--extensions.svg';
 import codeIcon from './icon--code.svg';
 import costumesIcon from './icon--costumes.svg';
 import soundsIcon from './icon--sounds.svg';
+// import App from '../../../blocklive/src/App.js';
 
 const messages = defineMessages({
     addExtension: {
@@ -472,3 +473,5 @@ const mapStateToProps = state => ({
 export default injectIntl(connect(
     mapStateToProps
 )(GUIComponent));
+
+// export default App

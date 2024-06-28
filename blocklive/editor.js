@@ -1689,8 +1689,12 @@ vm.addBackdrop = proxy(vm.addBackdrop,"addbackdrop",
 // })
 let oldUpdateBitmap = vm.updateBitmap
 vm.updateBitmap = (...args)=>{
+    let costumeIndex = args[0]
+    let oldAssetId = vm.editingTarget.getCostumes()[costumeIndex].assetId
+    let oldAssetMd5 = vm.editingTarget.getCostumes()[costumeIndex].md5
     // args: costumeIndex, bitmap, rotationCenterX, rotationCenterY, bitmapResolution
     oldUpdateBitmap.bind(vm)(...args);
+    
     // vm runs emitTargetsUpdate after creating new asset
     etuListeners.push(async()=>{
         let target = BL_UTILS.targetToName(vm.editingTarget);
@@ -1709,6 +1713,7 @@ vm.updateBitmap = (...args)=>{
 
         // send costume to scratch servers
         let stored = await vm.runtime.storage.store(asset.assetType,asset.dataFormat,asset.data,asset.assetId);
+        if(!hasCostumeMd5(oldAssetMd5)) {vm.runtime.storage.delete(oldAssetMd5)}
         // get costume info to send
 
         liveMessage({meta:'vm.updateBitmap',costume:sendCostume,target,costumeIndex,assetType:asset.assetType,h,w,bitmapResolution})
@@ -1782,6 +1787,10 @@ let oldUpdateSvg = vm.updateSvg
 vm.updateSvg = (...args)=>{
 
     console.log('updateSvg args:',args)
+    // collect before scratch generates new id
+    let costumeIndex = args[0]
+    let oldAssetId = vm.editingTarget.getCostumes()[costumeIndex].assetId
+    let oldAssetMd5 = vm.editingTarget.getCostumes()[costumeIndex].md5
     // args: costumeIndex, bitmap, rotationCenterX, rotationCenterY, bitmapResolution
     oldUpdateSvg.bind(vm)(...args);
 
@@ -1789,21 +1798,41 @@ vm.updateSvg = (...args)=>{
 {(async()=>{
     let target = BL_UTILS.targetToName(vm.editingTarget);
 
-    let costumeIndex = args[0]
     let costume = vm.editingTarget.getCostumes()[costumeIndex];
-    let sendCostume = JSON.parse(JSON.stringify(costume))
-    delete sendCostume.asset
-    console.log(costume)
+   
+
+    // const storage = vm.runtime.storage;
+    // costume.asset = storage.createAsset(
+    //     storage.AssetType.ImageVector,
+    //     costume.dataFormat,
+    //     (new TextEncoder()).encode(args[1]),
+    //     oldAssetId,
+    //     false // generate md5
+    // );
+    // costume.assetId = costume.asset.assetId;
+    // costume.md5 = `${costume.assetId}.${costume.dataFormat}`;
+    // // this.emitTargetsUpdate();
+
     let asset = costume.asset;
 
+    let sendCostume = JSON.parse(JSON.stringify(costume))
+    delete sendCostume.asset
+    console.log('costume')
+    console.log(costume)
+    console.log(args)
     // send costume to scratch servers
     let stored = await vm.runtime.storage.store(asset.assetType,asset.dataFormat,asset.data,asset.assetId);
+    if(!hasCostumeMd5(oldAssetMd5)) {vm.runtime.storage.delete(oldAssetMd5)}
     // get costume info to send
 
     liveMessage({meta:'vm.updateSvg',costume:sendCostume,target,costumeIndex,assetType:asset.assetType})
 })()}
 
 }
+function hasCostumeMd5(costumeMd5) {
+    return vm.runtime.targets.flatMap(target=>target.getCostumes()).map(costume=>costume.md5).includes(costumeMd5)
+}
+
 async function updateSvg(msg) {
     console.log(msg)
     console.log(msg.costume.assetId)
@@ -2978,7 +3007,7 @@ let chatCss = `
     border: solid rgb(203, 203, 203) 3px;
     background-color: rgb(255, 255, 255);
     transition: 0.2s;
-
+    padding:17px;
     margin-left:10px;
 }
 .bl-chat-toggle-button:hover{
@@ -3098,14 +3127,14 @@ bl-chat-msgs { overflow: -moz-scrollbars-none; }
 bl-chat-head-x{
     cursor:pointer;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 22px;
+    font-size: 27px;
     transform: rotate(45deg);
     font-weight: bold;
 
     border-radius: 100%;
     padding:5px;
-    width:20px;
-    height:20px;
+    width:30px;
+    height:30px;
     line-height: 16px;
     text-align: center;
     background-color: rgb(200, 1, 104);

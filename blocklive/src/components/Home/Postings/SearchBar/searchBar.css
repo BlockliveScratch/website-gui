@@ -1,0 +1,26 @@
+searchBar{
+    display:flex;
+    flex-flow:row;
+    align-items: center;
+    height:30px;
+    width:300px;
+    border:solid 2px rgba(1, 1, 1, 0.368);
+    border-radius: 13px;
+    background-color: white;
+    margin-top:2px;
+}
+
+glass{
+    --lrpadding:13px;
+    padding-left: var(--lrpadding);
+    padding-right: var(--lrpadding);
+}
+
+input{
+    display: flex;
+    flex-grow:1;
+    margin-right:5px;
+    outline: none;
+    border:none;
+    height:80%;
+}

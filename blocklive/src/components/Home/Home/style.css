@@ -1,0 +1,16 @@
+.activities {
+    display: flex;
+    flex-direction: row;
+    gap:20px;
+    align-self: stretch;
+    
+}
+
+.home{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    align-items: center;
+    justify-content: start;
+    width:870px;
+}

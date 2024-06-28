@@ -1,0 +1,27 @@
+filter {
+    display: flex;
+    flex-flow: row;
+    gap:10px;
+    flex-wrap: wrap;
+
+    align-items: center;
+}
+
+selected{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+
+    gap:4px;
+}
+unselected{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+
+    gap:4px;
+}
+
+filtername{
+    font-size: 24px;
+}

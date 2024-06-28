@@ -22,6 +22,7 @@ import {
 
 import log from './log';
 import storage from './storage';
+import { assetsUrl, projectsUrl } from '../../blocklive/consts';
 
 /* Higher Order Component to provide behavior for loading projects by id. If
  * there's no id, the default project is loaded.
@@ -134,9 +135,12 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         setProjectId: PropTypes.func
     };
+     // blocklive assets
     ProjectFetcherComponent.defaultProps = {
-        assetHost: 'https://assets.scratch.mit.edu',
-        projectHost: 'https://projects.scratch.mit.edu'
+        // assetHost: 'https://assets.scratch.mit.edu',
+        // projectHost: 'https://projects.scratch.mit.edu',
+        assetHost: assetsUrl,
+        projectHost: projectsUrl,
     };
 
     const mapStateToProps = state => ({

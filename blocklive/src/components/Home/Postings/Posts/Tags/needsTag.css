@@ -1,0 +1,18 @@
+needTag {
+    display:flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding-left:10px;
+    padding-right:10px;
+    gap:10px;
+}
+
+lilCircle{
+    --diameter:18px;
+    border-radius: 100%;
+    width:var(--diameter);
+    height:var(--diameter);
+    background-color: rgba(0, 0, 0, 0.201);
+}

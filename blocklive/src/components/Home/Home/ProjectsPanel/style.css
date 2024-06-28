@@ -1,0 +1,111 @@
+.projectsPanelWrapper2 * {
+    display: flex;
+}
+
+.projectsPanel{
+    /* outline: solid black; */
+    display: flex;
+    flex-flow: row nowrap;
+    gap:20px;
+    overflow-x: scroll;
+    width:100%;
+
+    /* transition:1s; */
+}
+.projectsPanel::-webkit-scrollbar{
+    display: none;
+}
+
+.projectStack{
+    display: flex;
+    flex-direction: column;
+    gap:4px;
+    align-items: center;
+
+}
+
+.projectTitle{
+    color:rgba(0, 0, 0, 0.695);
+    font-size: large;
+}
+a:has(.projectTitle) {
+    text-decoration: none;
+}
+.ppTitle{
+    font-size: x-large;
+    background: var(--headerContainerBackground);
+    width: 100%;
+    border-top-left-radius: var(--containerBorderRadius);
+    border-top-right-radius: var(--containerBorderRadius);
+
+    padding:var(--containerPadding);
+    padding-left:var(--headerContainerLeftPadding);
+
+    box-sizing: border-box;
+
+}
+
+.authors{
+    flex-flow:row wrap;
+}
+.author{
+
+}
+
+.author:hover{
+    text-decoration: underline;
+}
+
+.thumbnail {
+    height:100px;
+    border-radius: 14px;
+    object-fit: cover;
+    border:solid rgb(186, 186, 186) 1px;
+}
+.thumbnail.group {
+    width:120px;
+    height:120px;
+    border-radius: 50%;
+}
+.projectsPanelWrapper{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap:10px;
+    width:calc(100%);
+    /* width: 80%; */
+
+    padding-right:var(--containerPadding);
+    padding-left:var(--containerPadding);
+
+
+    box-sizing: border-box;
+}
+.projectsPanelWrapper2{
+    box-sizing: border-box;
+
+    display: flex;
+    flex-flow: column nowrap;
+    gap:10px;
+    width: 100%;
+    align-items: flex-start;
+    /* border: solid rgb(186, 186, 186) 1px; */
+    border-radius: var(--containerBorderRadius);
+    background:var(--containerBackground);
+    background:var(--containerBackground);
+    padding-bottom:var(--containerPadding);
+}
+.scrollButton{
+    /* padding:2px; */
+    /* background-color: rgb(190, 190, 190); */
+    color:rgba(0, 0, 0, 0.334);
+    border-radius: 10px;
+    font-size: 40px;
+    cursor: pointer;
+
+    transition: 0.4s;
+}
+.scrollButton:hover{
+    color:rgba(0, 0, 0, 0.729);
+
+}

@@ -1,6 +1,7 @@
 import ScratchStorage from 'scratch-storage';
 
 import defaultProject from './default-project';
+import { doAddWebStore } from '../../blocklive/consts';
 
 /**
  * Wrapper for ScratchStorage which adds default web sources.
@@ -11,22 +12,23 @@ class Storage extends ScratchStorage {
         super();
         this.cacheDefaultProject();
     }
-    addOfficialScratchWebStores () {
+    addOfficialBlockliveWebStores () {
         this.addWebStore(
             [this.AssetType.Project],
             this.getProjectGetConfig.bind(this),
             this.getProjectCreateConfig.bind(this),
             this.getProjectUpdateConfig.bind(this)
         );
-        this.addWebStore(
-            [this.AssetType.ImageVector, this.AssetType.ImageBitmap, this.AssetType.Sound],
-            this.getAssetGetConfig.bind(this),
-            // We set both the create and update configs to the same method because
-            // storage assumes it should update if there is an assetId, but the
-            // asset store uses the assetId as part of the create URI.
-            this.getAssetCreateConfig.bind(this),
-            this.getAssetCreateConfig.bind(this)
-        );
+        doAddWebStore(this)
+        // this.addWebStore(
+        //     [this.AssetType.ImageVector, this.AssetType.ImageBitmap, this.AssetType.Sound],
+        //     this.getAssetGetConfig.bind(this),
+        //     // We set both the create and update configs to the same method because
+        //     // storage assumes it should update if there is an assetId, but the
+        //     // asset store uses the assetId as part of the create URI.
+        //     this.getAssetCreateConfig.bind(this),
+        //     this.getAssetCreateConfig.bind(this)
+        // );
         this.addWebStore(
             [this.AssetType.Sound],
             asset => `static/extension-assets/scratch3_music/${asset.assetId}.${asset.dataFormat}`
@@ -84,6 +86,11 @@ class Storage extends ScratchStorage {
             asset.data,
             asset.id
         ));
+    }
+
+    // bl
+    delete(assetHash) {
+        return fetch(`${this.assetHost}/asset/${assetHash}/delete`,{method:'delete'})
     }
 }
 

@@ -1,0 +1,69 @@
+:root{
+    --headbarHeight:40px
+}
+.headbarBanner{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    background:pink;
+    justify-content: center;
+
+
+}
+
+html:not([data-scroll='0']) .headbarBanner {
+    border-bottom: rgba(0, 0, 0, 0.102) solid 2px;
+
+}
+
+.headbarbutton img {
+    height:40px;
+    opacity:50%;
+}
+.headbarbutton:has(img) {
+    padding:5px;
+    margin-left:10px;
+}
+
+.headbar{
+    display: flex;
+    flex-flow: row;
+    /* gap:30px; */
+    /* align-self: stretch; */
+    height:var(--headbarHeight);
+    padding:10px;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+
+}
+.headbar > * {
+    padding:15px;
+}
+
+.honklogo{
+    height:var(--headbarHeight);
+}
+.honklogo:hover{
+    scale: 110%;
+}
+
+.headbarbutton{
+    display: flex;
+    /* height:100%; */
+    justify-content: center;
+    align-items: center;
+    flex-grow:1;
+    border-radius: 6px;
+    transition: 0.15s background-color;
+    /* padding:10px;
+    
+    border: solid darkblue 2px; */
+
+}
+.headbarbutton:hover{
+    background-color: rgba(0, 0, 0, 0.086);
+}
+a.headbarbutton {
+    text-decoration: none !important;
+}

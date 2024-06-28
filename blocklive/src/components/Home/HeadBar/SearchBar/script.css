@@ -1,0 +1,48 @@
+.glass {
+    width: 20px;
+    color:blue;
+    /* filter: invert(42%) sepia(93%) saturate(152%) hue-rotate(250deg) brightness(119%) contrast(119%); */
+    filter: brightness(0%);
+    opacity: 40%;
+
+}
+
+.searchbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    background-color: rgba(167, 0, 131, 0.337);
+    padding:10px;
+    border-radius: 20px;
+    /* width:300px; */
+    width: 20px;
+    overflow:hidden;
+
+    transition: width 0.2s; 
+
+    gap:5px;
+    margin-left: 10px;
+}
+
+.searchText{
+    min-width: zero;
+    background: none;
+    display:none;
+}
+.searchText:focus{
+    outline: none;
+}
+
+.searchbar:hover {
+    width:300px;
+}
+.searchbar:hover .searchText {
+    display:inline;
+}
+.searchText:focus {
+    display:inline;
+}
+.searchbar:has(.searchText:focus)  {
+    width:300px;
+}
