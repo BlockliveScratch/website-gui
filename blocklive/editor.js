@@ -3359,18 +3359,15 @@ async function addMessage(msg, notif) {
 
     msgsElem.scrollTop = msgsElem.scrollHeight;
 
-//? {
+
     if(notif) {
-//? }
         if(!isChatOpen()) {
             incChatUnread();
         }
-//? {
         if(!isChatOpen() || !document.hasFocus()) {
             liveMessage({meta:"chatnotif",project:store.getState().preview.projectInfo.title, sender:msg.sender, text:msg.text, avatar:(await getUserInfo(msg.sender)).pic})
         }
     }
-    //? }
 }
 function postMessageBubble() {
     let inputElem = document.querySelector('bl-chat-input')
