@@ -70,3 +70,6 @@ async function createBLProjectIfNotExists(id) {
 createBLProjectIfNotExists(blId).then(
     onTabLoad
 )
+
+
+goToDefaultProject()

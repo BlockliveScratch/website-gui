@@ -1,6 +1,10 @@
 
-
-
+function goToDefaultProject() {
+    if(window.location.search == '') {
+        window.location.href='/?id=1'
+    }
+}
+goToDefaultProject()
 function reloadOnlineUsers() {
 }
 

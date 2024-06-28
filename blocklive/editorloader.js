@@ -2,8 +2,8 @@
 
 // process editor.js
 
-if(location.search == '') {
-    location.href='/?id=1'
+if(window.location.search == '') {
+    window.location.href='/?id=1'
 }
 
 async function getProcessed() {
