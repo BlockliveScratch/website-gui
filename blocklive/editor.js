@@ -1615,23 +1615,29 @@ vm.shareCostumeToTarget = editingProxy(vm.shareCostumeToTarget,'sharecostume',nu
 }),(data)=>([data.args[0],BL_UTILS.nameToTarget(data.extrargs.targettarget)?.id]))
 vm.addCostume = asyncAnyproxy(vm,vm.addCostume,"addcostume",
     async (args)=>{
+        console.log('addcostume',args)
         let targetName;
         let asset = args[1].asset;
 
-        let stored = await vm.runtime.storage.store(asset.assetType,asset.dataFormat,asset.data,asset.assetId);
-
+        if(asset.data) {
+            let stored = await vm.runtime.storage.store(asset.assetType,asset.dataFormat,asset.data,asset.assetId);
+        }
+  
         if(!!args[2]){targetName = targetToName(vm.runtime.getTargetById(args[2]))} else {targetName = targetToName(vm.editingTarget)}
-        return {target:targetName}
+        return {target:targetName,load:!!asset.data}
     },
     async (data)=>{
         let ret = [data.args[0],data.args[1],nameToTarget(data.extrargs.target)?.id,data.args[3]]
 
         let assetObj = data.args[1].asset
 
-              //assetType, assetId, dataFormat
-        let asset = await vm.runtime.storage.load(assetObj.assetType,assetObj.assetId,assetObj.dataFormat);
+        //assetType, assetId, dataFormat
+        if(data.extrargs.load){
+            let asset = await vm.runtime.storage.load(assetObj.assetType,assetObj.assetId,assetObj.dataFormat);
+            ret[1].asset = asset;
+
+        }
         
-        ret[1].asset = asset;
         return ret
     },null,null,null,null,null,args=>{
         args[1] = {...args[1]}
