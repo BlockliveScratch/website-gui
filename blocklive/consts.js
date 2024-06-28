@@ -1,6 +1,7 @@
 // export const assetsUrl = 'http://localhost:4103';
 // export const assetsUrl=`${location.origin}/assets`
-export const assetsUrl=`https://spore.us.to:4103`
+export const assetsUrl=`https://spore.us.to/assets`
+// export const assetsUrl=`https://spore.us.to:4103`
 // export const projectsUrl = 'http://localhost:3001';
 // export const assetsUrl = '';
 
