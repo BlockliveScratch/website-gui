@@ -1625,10 +1625,10 @@ vm.addCostume = asyncAnyproxy(vm,vm.addCostume,"addcostume",
         let ret = [data.args[0],data.args[1],nameToTarget(data.extrargs.target)?.id,data.args[3]]
         if(ret[1]?.asset?.data) {
             // adapted from scratch source 'file-uploader'
-            let asset = vm.runtime.storage.createAsset(
-                ret[1].asset.assetType, 
-                ret[1].asset.dataFormat,
-                Uint8Array.from(Object.values(ret[1].asset.data)),null,true);
+            // let asset = vm.runtime.storage.createAsset(
+            //     ret[1].asset.assetType, 
+            //     ret[1].asset.dataFormat,
+            //     Uint8Array.from(Object.values(ret[1].asset.data)),null,true);
             let stored = await vm.runtime.storage.store(asset.assetType,asset.dataFormat,asset.data,asset.assetId);
             ret[1] = {
                 name: null,
