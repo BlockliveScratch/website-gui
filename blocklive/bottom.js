@@ -55,13 +55,18 @@ async function getVM() {
 }
 
 blId=new URL(document.location).searchParams.get('id')
+document.getElementById('joinLink').value=`${location.origin}/?id=${blId}`
+document.getElementById('changeRoom').onclick=function(){
+    let newId = prompt('Enter new room key',blId);
+    if(newId!=blId){window.location.href=`/?id=${newId}`}
+}
+document.title=`Blocklive Playground / ${blId}`
 
 async function createBLProjectIfNotExists(id) {
     let exists = (await (await fetch(`${apiUrl}/projectExists/${id}`)).json()).exists;
 
     if(!exists) await fetch(`${apiUrl}/newProject/${uname}/${blId}`,{method:'post',body:JSON.stringify({blDefault:true}), headers:{'Content-Type': 'application/json'}});
 }
-
 createBLProjectIfNotExists(blId).then(
     onTabLoad
 )

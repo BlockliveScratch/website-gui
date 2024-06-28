@@ -75,6 +75,8 @@ import {
 import collectMetadata from '../../lib/collect-metadata';
 
 import styles from './menu-bar.css';
+import inputStyles from './project-title-input.css';
+
 
 import helpIcon from '../../lib/assets/icon--tutorials.svg';
 import mystuffIcon from './icon--mystuff.png';
@@ -662,6 +664,13 @@ class MenuBar extends React.Component {
                         )}
                         {this.props.canRemix ? remixButton : []}
                     </div>
+                    <div className={classNames(styles.menuBarItem)}>
+                        Join Link: <input readOnly={'readonly'} id="joinLink" value={'wait...'} className={classNames(styles.joinLink,inputStyles.titleField)}></input>
+                    </div>
+                    <div id='changeRoom' className={classNames(styles.menuBarItem)}>
+                        <Button>Change Room</Button>
+                    </div>
+ 
                     <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
                         {this.props.enableCommunity ? (
                             (this.props.isShowingProject || this.props.isUpdating) && (

@@ -1,4 +1,4 @@
-export const assetsUrl = 'http://localhost:3001';
+export const assetsUrl = 'http://localhost:4103';
 export const projectsUrl = 'http://localhost:3001';
 // export const assetsUrl = '';
 

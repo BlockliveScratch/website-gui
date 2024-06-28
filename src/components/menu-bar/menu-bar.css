@@ -49,9 +49,26 @@
     scale:2;
     filter:drop-shadow(1px 3px 0px #00000086);
 }
+.roomId{
+    padding:4px;
+    margin-left:4px;
+    border-radius: 5px;
+    background:rgba(255, 255, 255, 0.318);
+    color:blue;
+}
+.join-link{
+    /* background-color: rgba(255, 255, 255, 0.409); */
+    /* outline: none; */
+    border:none;
+    transition: 0.3s;
+    margin-left:10px;
+}
 
 .scratch-logo.clickable {
     cursor: pointer;
+}
+.scratch-logo:hover {
+    transform: scale(1.1);
 }
 
 .menu-bar-item {
