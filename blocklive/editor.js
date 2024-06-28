@@ -1645,8 +1645,8 @@ vm.addCostume = asyncAnyproxy(vm,vm.addCostume,"addcostume",
             args[1] = {...args[1]}
             args[1].asset = {...args[1].asset}
             delete args[1].asset.data
-            return args;
         }
+        return args;
     }
 )
 
