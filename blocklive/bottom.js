@@ -16,7 +16,7 @@ document.querySelector("body > div.index_app_3Qs6X > div > div.gui_menu-bar-posi
 
 
 
-async function saveNow() {
+async function saveNow(force) {
     let storage = vm.runtime.storage
 
     console.log('saving now')
@@ -45,7 +45,7 @@ async function saveNow() {
 
     assets.forEach(asset=>asset.uploaded=true)
 
-    await chrome.runtime.sendMessage(exId,{meta:'projectSavedJSON',blId,json:vm.toJSON(),version:blVersion,force:true})
+    await chrome.runtime.sendMessage(exId,{meta:'projectSavedJSON',blId,json:vm.toJSON(),version:blVersion,force})
     console.log('done saving')
 }
 async function getVM() {

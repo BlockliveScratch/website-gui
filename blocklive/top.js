@@ -50,6 +50,6 @@ function addStoreListen(store) {
 }
 async function totallyNewProject() {
     blVersion+=1;
-    await saveNow()
+    await saveNow(true)
     liveMessage({type:'forceReload'})
 }
