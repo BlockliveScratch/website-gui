@@ -2946,17 +2946,21 @@ blocklive-loading{
 }
 `
 function finishBLLoadingAnimation() {
+    // console.log('finishing')
     try{
+    setTimeout(()=>{document.querySelector('blocklive-loading').style.display = 'none'},601)
+
+
     document.querySelector('blocklive-loading').style.backdropFilter = ' blur(0px)'
     document.querySelector('#bl-load-logo').style.scale = '500%'
     document.querySelector('#bl-load-logo').style.opacity = '0%'
     document.querySelector('.bl-loading-text').style.opacity = '0%'
 
-    setTimeout(()=>{document.querySelector('blocklive-loading').style.display = 'none'},601)
     } catch (e) {console.error(e)}
 }
 
 function startBLLoadingAnimation() {
+    // console.log('starting')
     try{
         document.querySelector('blocklive-loading').style.display = 'block'
         document.querySelector('blocklive-loading').style.backdropFilter = ' blur(12px)'
@@ -2973,6 +2977,7 @@ function injectLoadingOverlay() {
     document.head.appendChild(styleInj)
 
     let loadingOverlay = document.createElement('blocklive-loading')
+    loadingOverlay.style.display='none'
     loadingOverlay.innerHTML = overlayHTML
     document.body.appendChild(loadingOverlay)
 
