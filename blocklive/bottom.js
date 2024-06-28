@@ -58,6 +58,7 @@ blId=new URL(document.location).searchParams.get('id')
 document.getElementById('joinLink').value=`${location.origin}/?id=${blId}`
 document.getElementById('changeRoom').onclick=function(){
     let newId = prompt('Enter new room key',blId);
+    if(!newId) return;
     if(newId!=blId){window.location.href=`/?id=${newId}`}
 }
 document.title=`Blocklive Playground / ${blId}`

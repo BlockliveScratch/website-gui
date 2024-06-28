@@ -4,8 +4,8 @@
 
 const randomUname = `monke${Math.floor(Math.random()*1000)}`
 function askForUsername() {
-    uname = prompt('enter a username (click on profile in top right to change it again)')
-    saveUsername(uname)
+    let username = prompt('enter a username (click on profile in top right to change it again)')
+    if(username) saveUsername(username)
 }
 function loadDefaultUsername() {
     uname = localStorage.getItem('username')
