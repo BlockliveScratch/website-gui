@@ -1,4 +1,4 @@
-var apiUrl='http://localhost:4101'
+var apiUrl=`${location.origin}/websiteapi`
 
 const socket = io.connect(apiUrl,{jsonp:false,transports:['websocket', 'xhr-polling', 'polling', 'htmlfile', 'flashsocket']})
 
