@@ -69,7 +69,7 @@ async function require(url) {
 
 async function inject() {
 
-    await require('https://cdn.socket.io/4.6.0/socket.io.min.js')
+    await require('https://cdn.socket.io/4.7.5/socket.io.min.js')
 
 
     let script = document.createElement('script')
