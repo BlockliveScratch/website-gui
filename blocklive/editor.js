@@ -658,7 +658,7 @@ function asyncAnyproxy(bindTo,action,name,extrargs,mutator,before,then,dontSend,
             // console.log('intrecepted:')
             // console.log(...args)
             let extrargsObj = null;
-            if(!!extrargs) {extrargsObj=extrargs(args)}
+            if(!!extrargs) {extrargsObj=await extrargs(args)}
             proxiedArgs = args
 
             let retVal = action.bind(bindTo)(...args)
