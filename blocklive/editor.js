@@ -623,7 +623,8 @@ function asyncEditingProxy(action,name,before,after,extrargs,mutator) {
         })
 }
 
-function asyncAnyproxy(bindTo,action,name,extrargs,mutator,before,then,dontSend,dontDo,senderThen) {
+// extrargs doesnt mutate client args
+function asyncAnyproxy(bindTo,action,name,extrargs,mutator,before,then,dontSend,dontDo,senderThen,mutateSendArgs) {
     let proxiedFunction =async function(...args) {
         if(args[0]=='linguini') {
 // if linguini, ...args are ['linguini', data, data.args]
@@ -661,6 +662,7 @@ function asyncAnyproxy(bindTo,action,name,extrargs,mutator,before,then,dontSend,
             proxiedArgs = args
 
             let retVal = action.bind(bindTo)(...args)
+            if(mutateSendArgs) {args=mutateSendArgs(args)}
             if(!dontSend?.(...args)) { liveMessage({meta:"sprite.proxy",data:{name,args,extrargs:extrargsObj}}) }
             if(senderThen) {
                 if(!!retVal?.then) {
@@ -1616,11 +1618,6 @@ vm.addCostume = asyncAnyproxy(vm,vm.addCostume,"addcostume",
         let targetName;
         let asset = args[1].asset;
 
-        args[1]={...args[1]}
-        args[1].asset={...args[1].asset}
-        delete args[1].asset.data
-
-
         let stored = await vm.runtime.storage.store(asset.assetType,asset.dataFormat,asset.data,asset.assetId);
 
         if(!!args[2]){targetName = targetToName(vm.runtime.getTargetById(args[2]))} else {targetName = targetToName(vm.editingTarget)}
@@ -1636,7 +1633,12 @@ vm.addCostume = asyncAnyproxy(vm,vm.addCostume,"addcostume",
         
         ret[1].asset = asset;
         return ret
-    }
+    },null,null,null,null,null,(args=>{
+        args[1] = {...args[1]}
+        args[1].asset = {...args[1].asset}
+        delete args[1].asset.data
+        return args;
+    })
 )
 
 vm.addBackdrop = proxy(vm.addBackdrop,"addbackdrop",
