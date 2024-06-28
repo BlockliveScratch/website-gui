@@ -1650,7 +1650,7 @@ vm.addCostume = asyncAnyproxy(vm,vm.addCostume,"addcostume",
     }
 )
 
-vm.addCostume = asyncAnyproxy(vm,vm.addCostume,"addbackdrop",
+vm.addBackdrop = asyncAnyproxy(vm,vm.addBackdrop,"addbackdrop",
     async (args)=>{
         console.log('addbackdrop',args)
         let asset = args[1].asset;
